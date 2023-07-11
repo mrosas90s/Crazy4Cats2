@@ -1,14 +1,20 @@
-<p style="color: green"><%= notice %></p>
+<p><%= @post.content %></p>
+<p>Posted by: <%= @post.user.email %></p>
+<p><%= @post.likes.count %> Likes</p>
 
-<%= render @post %>
+<h2>Comments</h2>
+<% @post.comments.each do |comment| %>
+  <p><strong><%= comment.user.email %>:</strong> <%= comment.content %></p>
+<% end %>
 
-<div>
-  <%= link_to "Edit this post", edit_post_path(@post) %> |
-  <%= link_to "Back to posts", posts_path %>
+<%= form_with(model: [ @post, Comment.new ]) do |form| %>
+  <div class="field">
+    <%= form.text_area :content, placeholder: "Publicar" %>
+  </div>
+  <div class="actions">
+    <%= form.submit "Publicar" %>
+  </div>
+<% end %>
 
-  <%= button_to "Destroy this post", @post, method: :delete %>
-  <p>Posted by: <%= @post.user.email %></p>
-  <%= link_to 'Like', likes_path(post_id: @post.id), method: :post %>
-
-
-</div>
+<%= link_to 'Edit', edit_post_path(@post) %>
+<%= link_to 'Back', posts_path %>

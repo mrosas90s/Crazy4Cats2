@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  resources :comments
   resources :likes, only: [:create]
 
   resources :posts do
+    resources :comments, only: [:create, :destroy]
     post 'like', on: :member
     get 'update_likes', on: :member
   end
