@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :likes
+  resources :likes, only: [:create]
+
   resources :posts do
     post 'like', on: :member
     get 'update_likes', on: :member

@@ -32,7 +32,7 @@ class LikesController < ApplicationController
       redirect_to posts_path, alert: 'Failed to add like.'
     end
   end
-  end
+end
 
   # PATCH/PUT /likes/1 or /likes/1.json
   def update
